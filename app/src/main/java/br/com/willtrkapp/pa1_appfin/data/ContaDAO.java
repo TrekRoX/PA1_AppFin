@@ -20,15 +20,14 @@ public class ContaDAO {
     public List<Conta> buscaTodasContas()
     {
         database=dbHelper.getReadableDatabase();
-        List<Conta> contatos = new ArrayList<>();
+        List<Conta> contas = new ArrayList<>();
 
         Cursor cursor;
 
-        String[] cols=new String[] {SQLiteHelper.KEY_ID, SQLiteHelper.KEY_NAME, SQLiteHelper.KEY_FONE, SQLiteHelper.KEY_EMAIL, SQLiteHelper.KEY_FAVORITO,
-                SQLiteHelper.KEY_FONE2, SQLiteHelper.KEY_DTNASC };
+        String[] cols=new String[] {SQLiteHelper.TB_CONTA_KEY_ID, SQLiteHelper.TB_CONTA_KEY_DESCR, SQLiteHelper.TB_CONTA_KEY_SALDO_INI, SQLiteHelper.TB_CONTA_KEY_SALDO };
 
-        cursor = database.query(SQLiteHelper.DATABASE_TABLE, cols, null , null,
-                null, null, SQLiteHelper.KEY_NAME);
+        cursor = database.query(SQLiteHelper.DB_TABLE_CONTA, cols, null , null,
+                null, null, SQLiteHelper.TB_CONTA_KEY_DESCR);
 
         while (cursor.moveToNext())
         {
@@ -37,11 +36,25 @@ public class ContaDAO {
             conta.setDescr(cursor.getString(1));
             conta.setSaldoIni(cursor.getFloat(2));
             conta.setSaldo(cursor.getFloat(3));
-            contatos.add(conta);
+            contas.add(conta);
         }
         cursor.close();
 
         database.close();
-        return contatos;
+        return contas;
+    }
+
+    public float getSaldoContas()
+    {
+        float saldo = 0;
+        database = dbHelper.getReadableDatabase();
+        String sql= "SELECT SUM(" + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ") FROM " + SQLiteHelper.DB_TABLE_CONTA + ";";
+        Cursor cursor = database.rawQuery(sql, null);
+        if(cursor.moveToFirst())
+            saldo = cursor.getFloat(0);
+
+        cursor.close();
+
+        return saldo;
     }
 }

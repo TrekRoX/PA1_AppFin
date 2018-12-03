@@ -3,7 +3,7 @@ package br.com.willtrkapp.pa1_appfin.model;
 import java.io.Serializable;
 
 public class Conta implements Serializable {
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     private long id;
     private String descr;
     private float saldoIni;
