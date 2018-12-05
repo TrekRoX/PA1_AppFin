@@ -65,7 +65,7 @@ public class TransacaoDAO {
 
 
 
-        if (c.getId()>0)
+        if (trans.getId()>0)
             database.update(SQLiteHelper.DB_TABLE_TRANSACAO, values, SQLiteHelper.TB_TRANSACAO_KEY_ID + "="
                     + trans.getId(), null);
         else

@@ -46,7 +46,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             TB_CATEGORIA_KEY_DESCR + " TEXT NOT NULL); ";
 
     private static final String DB_POPULA_CAREGORIA = "INSERT INTO " + DB_TABLE_CATEGORIA + "( " +
-            TB_CATEGORIA_KEY_DESCR + " ) VALUES ('Alimentação', 'Saúde','Transporte', 'Moradia', 'Educação', 'Lazer', 'Tarifas bancárias', 'Luz', 'Água', 'Telefone')";
+            TB_CATEGORIA_KEY_DESCR + " ) VALUES ('Alimentação'), ('Saúde'),('Transporte'), ('Moradia'), ('Educação'), ('Lazer'), ('Tarifas bancárias'), ('Luz'), ('Água'), ('Telefone')";
 
 
 

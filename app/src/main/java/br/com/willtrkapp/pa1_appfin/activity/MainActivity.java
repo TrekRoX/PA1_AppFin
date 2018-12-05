@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         handleIntent(intent);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         fabNvConta = (FloatingActionButton) findViewById(R.id.fabNvConta);
         fabNvCredito = (FloatingActionButton) findViewById(R.id.fabNvCredito);

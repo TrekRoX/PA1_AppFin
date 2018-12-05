@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayoutConta"
@@ -10,9 +9,10 @@
     tools:context="br.com.willtrkapp.pa1_appfin.activity.ContaActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -25,33 +25,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <TextView
             android:id="@+id/textViewNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOME">
-        </TextView>
+            android:text="NOME"></TextView>
 
 
         <EditText
             android:id="@+id/editTextNome"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </EditText>
+            android:layout_height="wrap_content"></EditText>
+
         <TextView
             android:id="@+id/textViewFone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FONE">
-        </TextView>
+            android:text="FONE"></TextView>
+
         <EditText
             android:id="@+id/editTextFone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </EditText>
-
-
+            android:layout_height="wrap_content"></EditText>
 
 
         <!--FIM-->

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PA1_AppFin</string>
+    <string name="app_name">SDM Finanças</string>
     <string name="selecione_uma_opcao">Selecione uma opção</string>
     <string name="title_activity_conta">Nova conta</string>
 </resources>
