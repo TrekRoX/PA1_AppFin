@@ -23,14 +23,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     static final String TB_CATEGORIA_KEY_ID = "id";
     static final String TB_CATEGORIA_KEY_DESCR = "descr";
 
-    //Tabela trnasacoes
+    //Tabela transacoes
     static final String DB_TABLE_TRANSACAO = "transacoes";
     static final String TB_TRANSACAO_KEY_ID = "id";
     static final String TB_TRANSACAO_KEY_ID_CONTA = "idConta";
     static final String TB_TRANSACAO_KEY_ID_CATEGORIA = "idCategoria";
     static final String TB_TRANSACAO_KEY_VALOR = "valor";
     static final String TB_TRANSACAO_KEY_DESCR = "descr";
-    static final String TB_TRANSACAO_KEY_NATUREZA = "natureza";
+    static final String TB_TRANSACAO_KEY_NATUREZA = "natureza"; //1 = CREDITO 2 = DEBITO
+    static final String TB_TRANSACAO_KEY_DATA_INS = "dtIns"; /*INSERCAO DA TRANSCAO*/
+    static final String TB_TRANSACAO_KEY_DATA_LIB = "dtLib"; /*LIBERACAO DA TRANSACAO*/
 
 
     private static final String DB_CREATE_TB_CONTA = "CREATE TABLE "+ DB_TABLE_CONTA +" (" +
@@ -43,6 +45,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             TB_CATEGORIA_KEY_ID  +  " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             TB_CATEGORIA_KEY_DESCR + " TEXT NOT NULL); ";
 
+    private static final String DB_POPULA_CAREGORIA = "INSERT INTO " + DB_TABLE_CATEGORIA + "( " +
+            TB_CATEGORIA_KEY_DESCR + " ) VALUES ('Alimentação', 'Saúde','Transporte', 'Moradia', 'Educação', 'Lazer', 'Tarifas bancárias', 'Luz', 'Água', 'Telefone')";
+
+
+
     private static final String DB_CREATE_TB_TRANCACAO = "CREATE TABLE "+ DB_TABLE_TRANSACAO +" (" +
             TB_TRANSACAO_KEY_ID  +  " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             TB_TRANSACAO_KEY_ID_CONTA  +  " INTEGER NOT NULL, " +
@@ -50,6 +57,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             TB_TRANSACAO_KEY_VALOR + " REAL NOT NULL, "  +
             TB_TRANSACAO_KEY_DESCR + " TEXT NOT NULL, "  +
             TB_TRANSACAO_KEY_NATUREZA + " INTEGER NOT NULL, " + //1 = CREDITO 2 = DEBITO
+            TB_TRANSACAO_KEY_DATA_INS + " INTEGER NOT NULL, " +
+            TB_TRANSACAO_KEY_DATA_LIB + " INTEGER NOT NULL, " +
             " FOREIGN KEY (" + TB_TRANSACAO_KEY_ID_CONTA + ") REFERENCES " + DB_TABLE_CONTA  +"(" + TB_CONTA_KEY_ID + " ), " +
             " FOREIGN KEY (" + TB_TRANSACAO_KEY_ID_CATEGORIA + ") REFERENCES " + DB_TABLE_CATEGORIA  +"(" + TB_CATEGORIA_KEY_ID + ")); ";
 
@@ -64,6 +73,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         Log.v("LOG_FIN_PA1", "Criou conta");
         db.execSQL(DB_CREATE_TB_CATEGORIA);
         Log.v("LOG_FIN_PA1", "Criou categoria");
+        db.execSQL(DB_POPULA_CAREGORIA);
+        Log.v("LOG_FIN_PA1", "Populou categoria");
         db.execSQL(DB_CREATE_TB_TRANCACAO);
         Log.v("LOG_FIN_PA1", "Criou transacao");
     }

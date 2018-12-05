@@ -1,5 +1,7 @@
 package br.com.willtrkapp.pa1_appfin.activity;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        handleIntent(intent);
+
         fabNvConta = (FloatingActionButton) findViewById(R.id.fabNvConta);
         fabNvCredito = (FloatingActionButton) findViewById(R.id.fabNvCredito);
         fabNvDespesa = (FloatingActionButton) findViewById(R.id.fabNvDespesa);
@@ -31,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         conta.buscaTodasContas();
 
 
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            /*String query = intent.getStringExtra(SearchManager.QUERY);
+            searchView.clearFocus();
+            updateUI(query);*/
+        }
     }
 
     private void inicializaEventosFloatingMenu()
@@ -68,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (view == fabNvConta) {
-                    showToast("Nova conta");
+                    Intent i = new Intent(getApplicationContext(), ContaActivity.class);
+                    startActivityForResult(i, 1);
                 } else if (view == fabNvDespesa) {
                     showToast("Novo debito");
                 } else if (view == fabNvCredito) {
@@ -77,6 +91,30 @@ public class MainActivity extends AppCompatActivity {
                 faMenu.close(true);
             }
         };
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+/*        if (requestCode == 1)
+            if (resultCode == RESULT_OK) {
+                showSnackBar(getResources().getString(R.string.contato_adicionado));
+                //   adapter.notifyItemInserted(adapter.getItemCount());
+                updateUI(null);
+            }
+
+
+
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK)
+                showSnackBar(getResources().getString(R.string.contato_alterado));
+            if (resultCode == 3)
+                showSnackBar(getResources().getString(R.string.contato_apagado));
+
+
+
+            updateUI(null);
+        }*/
     }
 
     private void showToast(String msg) {

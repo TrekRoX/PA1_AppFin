@@ -1,5 +1,6 @@
 package br.com.willtrkapp.pa1_appfin.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +18,7 @@ public class ContaDAO {
         this.dbHelper=new SQLiteHelper(context);
     }
 
-    public List<Conta> buscaTodasContas()
-    {
+    public List<Conta> buscaTodasContas() {
         database=dbHelper.getReadableDatabase();
         List<Conta> contas = new ArrayList<>();
 
@@ -44,8 +44,7 @@ public class ContaDAO {
         return contas;
     }
 
-    public float getSaldoContas()
-    {
+    public float getSaldoContas() {
         float saldo = 0;
         database = dbHelper.getReadableDatabase();
         String sql= "SELECT SUM(" + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ") FROM " + SQLiteHelper.DB_TABLE_CONTA + ";";
@@ -56,5 +55,28 @@ public class ContaDAO {
         cursor.close();
 
         return saldo;
+    }
+
+    public void salvaConta(Conta c) {
+
+        database=dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SQLiteHelper.TB_CONTA_KEY_DESCR, c.getDescr());
+        values.put(SQLiteHelper.TB_CONTA_KEY_SALDO, c.getSaldo());
+        values.put(SQLiteHelper.TB_CONTA_KEY_SALDO_INI, c.getSaldoIni());
+
+
+        if (c.getId()>0)
+            database.update(SQLiteHelper.DB_TABLE_CONTA, values, SQLiteHelper.TB_CONTA_KEY_ID + "="
+                    + c.getId(), null);
+        else
+            database.insert(SQLiteHelper.DB_TABLE_CONTA, null, values);
+
+        database.close();
+
+    }
+
+    public void removeConta(Conta c) {
+        dbHelper.getReadableDatabase().delete(SQLiteHelper.DB_TABLE_CONTA, SQLiteHelper.TB_CONTA_KEY_ID + "=" + c.getId(), null);
     }
 }
