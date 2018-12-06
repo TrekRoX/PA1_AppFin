@@ -2,4 +2,9 @@
     <string name="app_name">SDM Finanças</string>
     <string name="selecione_uma_opcao">Selecione uma opção</string>
     <string name="title_activity_conta">Nova conta</string>
+    <string name="salvar">Salvar</string>
+    <string name="excluir">Excluir</string>
+    <string name="conta_adicionada">Conta adicionada</string>
+    <string name="conta_apagada">Conta removida</string>
+    <string name="lista_contas_vazia">Lista de contas vazia</string>
 </resources>

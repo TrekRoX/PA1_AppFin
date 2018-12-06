@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,8 @@ public class ContaDAO {
     }
 
     public List<Conta> buscaTodasContas() {
-        database=dbHelper.getReadableDatabase();
+        Log.v("LOG_FIN_PA1", "hit ContatoDAO.buscaTodasContas");
+        database = dbHelper.getReadableDatabase();
         List<Conta> contas = new ArrayList<>();
 
         Cursor cursor;
@@ -37,6 +39,7 @@ public class ContaDAO {
             conta.setSaldoIni(cursor.getFloat(2));
             conta.setSaldo(cursor.getFloat(3));
             contas.add(conta);
+            Log.v("LOG_FIN_PA1", "Leu 1 conta");
         }
         cursor.close();
 
@@ -59,6 +62,7 @@ public class ContaDAO {
 
     public void salvaConta(Conta c) {
 
+        Log.v("LOG_FIN_PA1", "hit salvaConta");
         database=dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SQLiteHelper.TB_CONTA_KEY_DESCR, c.getDescr());
@@ -67,10 +71,17 @@ public class ContaDAO {
 
 
         if (c.getId()>0)
-            database.update(SQLiteHelper.DB_TABLE_CONTA, values, SQLiteHelper.TB_CONTA_KEY_ID + "="
-                    + c.getId(), null);
+        {
+
+            database.update(SQLiteHelper.DB_TABLE_CONTA, values, SQLiteHelper.TB_CONTA_KEY_ID + "=" + c.getId(), null);
+            Log.v("LOG_FIN_PA1", "fez update");
+        }
         else
+        {
             database.insert(SQLiteHelper.DB_TABLE_CONTA, null, values);
+            Log.v("LOG_FIN_PA1", "fez insert");
+        }
+
 
         database.close();
 
