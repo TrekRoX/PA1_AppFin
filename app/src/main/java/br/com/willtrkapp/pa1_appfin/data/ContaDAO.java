@@ -20,7 +20,6 @@ public class ContaDAO {
     }
 
     public List<Conta> buscaTodasContas() {
-        Log.v("LOG_FIN_PA1", "hit ContatoDAO.buscaTodasContas");
         database = dbHelper.getReadableDatabase();
         List<Conta> contas = new ArrayList<>();
 
@@ -39,7 +38,6 @@ public class ContaDAO {
             conta.setSaldoIni(cursor.getFloat(2));
             conta.setSaldo(cursor.getFloat(3));
             contas.add(conta);
-            Log.v("LOG_FIN_PA1", "Leu 1 conta");
         }
         cursor.close();
 

@@ -1,6 +1,5 @@
 package br.com.willtrkapp.pa1_appfin.activity;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +28,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private ContaDAO contaDAO;
     private FloatingActionMenu faMenu;
@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
         handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            /*String query = intent.getStringExtra(SearchManager.QUERY);
+            searchView.clearFocus();
+            updateUI(query);*/
+        }
     }
 
     @Override
@@ -78,14 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            /*String query = intent.getStringExtra(SearchManager.QUERY);
-            searchView.clearFocus();
-            updateUI(query);*/
-        }
-    }
-
     private void inicializaEventosFloatingMenu()
     {
         //Controlando abertura e fechamento do menu flutuante
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private View.OnClickListener onFloatButtonClick() {
+
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,10 +187,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
 
-
         adapter.setClickListener(new ContaAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Log.v("LOG_FIN_PA1", "Hit onItemClick");
+
                 final Conta conta = contas.get(position);
                 Intent i = new Intent(getApplicationContext(), ContaActivity.class);
                 i.putExtra("conta", conta);
@@ -248,5 +250,4 @@ public class MainActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
     }
-
 }

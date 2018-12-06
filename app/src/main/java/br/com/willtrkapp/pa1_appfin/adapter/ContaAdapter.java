@@ -18,6 +18,7 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaViewHol
     private static List<Conta> contas;
     private Context context;
 
+
     private static ItemClickListener clickListener;
 
     public ContaAdapter(List<Conta> contas, Context context) {
@@ -27,16 +28,16 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaViewHol
 
     @Override
     public ContaViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        Log.v("LOG_FIN_PA1", "HIT onCreateViewHolder");
         View view = LayoutInflater.from(context).inflate(R.layout.contato_celula, viewGroup, false);
         return new ContaViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder( ContaViewHolder contaViewHolder, int i) {
         contaViewHolder.desr.setText(contas.get(i).getDescr());
-        Log.v("LOG_FIN_PA1", "HIT onBindViewHolder: " + contas.get(i).getDescr());
-        /*contaViewHolder.saldoIni.setText(String.format("%.2f", contas.get(i).getSaldoIni()));*/
+        contaViewHolder.saldo.setText(String.format("%.2f", contas.get(i).getSaldoIni()));
+
     }
 
     @Override
@@ -46,23 +47,27 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaViewHol
 
     public void setClickListener(ItemClickListener itemClickListener) {
         clickListener = itemClickListener;
+        Log.v("LOG_FIN_PA1", "Setou onclick listener");
     }
 
-    public  class ContaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public  class ContaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView desr;
-        /*final TextView saldoIni;*/
+        final TextView saldo;
 
         ContaViewHolder(View view) {
             super(view);
 
+            Log.v("LOG_FIN_PA1", "Nova ViewHolder");
             desr = (TextView)view.findViewById(R.id.descrContaCelula);
-            /*saldoIni = (CheckBox)view.findViewById(R.id.editTextSaldoInicial);*/
+            saldo = (TextView)view.findViewById(R.id.saldoContaCelula);
             view.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
+            Log.v("LOG_FIN_PA1", "HIT onClick");
+
             if (clickListener != null)
                 clickListener.onItemClick(getAdapterPosition());
         }
