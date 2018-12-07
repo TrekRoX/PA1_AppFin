@@ -63,8 +63,6 @@ public class TransacaoDAO {
         values.put(SQLiteHelper.TB_TRANSACAO_KEY_DATA_INS, trans.getDtIns().getTime() / 1000); //TESTAR
         values.put(SQLiteHelper.TB_TRANSACAO_KEY_DATA_LIB, trans.getDtLib().getTime() / 1000); //TESTAR
 
-
-
         if (trans.getId()>0)
             database.update(SQLiteHelper.DB_TABLE_TRANSACAO, values, SQLiteHelper.TB_TRANSACAO_KEY_ID + "="
                     + trans.getId(), null);

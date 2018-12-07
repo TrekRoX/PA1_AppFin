@@ -126,9 +126,13 @@ public class MainActivity extends AppCompatActivity  {
                     Intent i = new Intent(getApplicationContext(), ContaActivity.class);
                     startActivityForResult(i, 1);
                 } else if (view == fabNvDespesa) {
-                    showToast("Novo debito");
+                    Intent i = new Intent(getApplicationContext(), TransacaoActivity.class);
+                    i.setAction("Novo Débito");
+                    startActivityForResult(i, 3);
                 } else if (view == fabNvCredito) {
-                    showToast("Novo credito");
+                    Intent i = new Intent(getApplicationContext(), TransacaoActivity.class);
+                    i.setAction("Novo Crédito");
+                    startActivityForResult(i, 3);
                 }
                 faMenu.close(true);
             }
@@ -152,6 +156,14 @@ public class MainActivity extends AppCompatActivity  {
                 showToast(getResources().getString(R.string.conta_apagada));
 
             updateUI();
+        }
+
+        if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                showToast(getResources().getString(R.string.credito_inserido));
+                //   adapter.notifyItemInserted(adapter.getItemCount());
+                updateUI();
+            }
         }
     }
 

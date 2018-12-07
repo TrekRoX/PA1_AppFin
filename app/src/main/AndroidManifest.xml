@@ -26,7 +26,11 @@
             android:name=".activity.ContaActivity"
             android:label="@string/title_activity_conta"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.TransacaoActivity"></activity>
+
+        <activity android:name=".activity.TransacaoActivity"
+            android:label="@string/title_activity_transacao"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

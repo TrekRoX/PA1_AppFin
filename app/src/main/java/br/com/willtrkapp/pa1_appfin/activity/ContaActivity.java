@@ -54,7 +54,7 @@ public class ContaActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_detalhe, menu);
         if (!getIntent().hasExtra("conta"))
         {
-            MenuItem item = menu.findItem(R.id.delContato);
+            MenuItem item = menu.findItem(R.id.deleteMenu);
             item.setVisible(false);
         }
         return true;
@@ -62,12 +62,11 @@ public class ContaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.v("LOG_FIN_PA1", "Hit onOptionsItemSelected");
         switch (item.getItemId()) {
-            case R.id.salvarContato:
+            case R.id.salvarMenu:
                 salvar();
                 return true;
-            case R.id.delContato:
+            case R.id.deleteMenu:
                 delete();
                 return true;
             default:
