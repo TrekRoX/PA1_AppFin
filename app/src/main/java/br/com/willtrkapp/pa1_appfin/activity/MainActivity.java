@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity  {
 
         setupRecyclerView();
 
+
         fabNvConta = (FloatingActionButton) findViewById(R.id.fabNvConta);
         fabNvCredito = (FloatingActionButton) findViewById(R.id.fabNvCredito);
         fabNvDespesa = (FloatingActionButton) findViewById(R.id.fabNvDespesa);
@@ -101,14 +102,14 @@ public class MainActivity extends AppCompatActivity  {
         });*/
 
         //Fecha o menu em caso de click fora do floatingbutton
-        faMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (faMenu.isOpened()) {
-                    faMenu.close(true);
-                }
-            }
-        });
+        //faMenu.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View view) {
+        //        if (faMenu.isOpened()) {
+        //            faMenu.close(true);
+        //        }
+        //    }
+        //});
 
         //Controla os clicks individuais de cada floating button
         fabNvConta.setOnClickListener(onFloatButtonClick());
@@ -144,18 +145,14 @@ public class MainActivity extends AppCompatActivity  {
                 updateUI();
             }
 
-
-
-/*        if (requestCode == 2) {
+        if (requestCode == 2) {
             if (resultCode == RESULT_OK)
-                showSnackBar(getResources().getString(R.string.contato_alterado));
+                showToast(getResources().getString(R.string.conta_alterada));
             if (resultCode == 3)
-                showSnackBar(getResources().getString(R.string.contato_apagado));
+                showToast(getResources().getString(R.string.conta_apagada));
 
-
-
-            updateUI(null);
-        }*/
+            updateUI();
+        }
     }
 
 
@@ -186,7 +183,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
     private void setupRecyclerView() {
-
+        Log.v("LOG_FIN_PA1", "Hit setupRecyclerView");
         adapter.setClickListener(new ContaAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {

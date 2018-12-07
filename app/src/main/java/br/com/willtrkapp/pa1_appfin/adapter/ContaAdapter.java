@@ -47,17 +47,15 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaViewHol
 
     public void setClickListener(ItemClickListener itemClickListener) {
         clickListener = itemClickListener;
-        Log.v("LOG_FIN_PA1", "Setou onclick listener");
     }
 
-    public  class ContaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ContaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView desr;
         final TextView saldo;
 
         ContaViewHolder(View view) {
             super(view);
 
-            Log.v("LOG_FIN_PA1", "Nova ViewHolder");
             desr = (TextView)view.findViewById(R.id.descrContaCelula);
             saldo = (TextView)view.findViewById(R.id.saldoContaCelula);
             view.setOnClickListener(this);
@@ -66,8 +64,6 @@ public class ContaAdapter extends RecyclerView.Adapter<ContaAdapter.ContaViewHol
 
         @Override
         public void onClick(View view) {
-            Log.v("LOG_FIN_PA1", "HIT onClick");
-
             if (clickListener != null)
                 clickListener.onItemClick(getAdapterPosition());
         }
