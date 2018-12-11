@@ -7,14 +7,12 @@ public class Conta implements Serializable {
     private long id;
     private String descr;
     private float saldoIni;
-    private float saldo;
 
     public Conta(){ }
 
-    public Conta(String descr, float saldoIni, float saldo) {
+    public Conta(String descr, float saldoIni) {
         this.descr = descr;
         this.saldoIni = saldoIni;
-        this.saldo = saldo;
     }
 
     public String getDescr() {
@@ -33,19 +31,17 @@ public class Conta implements Serializable {
         this.saldoIni = saldoIni;
     }
 
-    public float getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(float saldo) {
-        this.saldo = saldo;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @Override
+    public  String toString()
+    {
+        return this.getDescr();
     }
 }

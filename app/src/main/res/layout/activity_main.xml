@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_add"
-            fab:fab_label="Novo crédito"
+            fab:fab_label="@string/novo_credito"
             fab:fab_size="mini"
             />
 
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_add"
-            fab:fab_label="Nova despesa"
+            fab:fab_label="@string/novo_debito"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>

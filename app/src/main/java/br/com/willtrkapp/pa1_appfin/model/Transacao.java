@@ -1,32 +1,17 @@
 package br.com.willtrkapp.pa1_appfin.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transacao {
     private int id;
-    private int idConta;
+    private long idConta;
     private long idCategoria;
     private float valor;
     private String descricao;
     private int natureza; //1 = CREDITO 2 = DEBITO
     private Date dtIns; //Data inserção
     private Date dtLib; //Data liberação
-
-    public Date getDtIns() {
-        return dtIns;
-    }
-
-    public void setDtIns(Date dtIns) {
-        this.dtIns = dtIns;
-    }
-
-    public Date getDtLib() {
-        return dtLib;
-    }
-
-    public void setDtLib(Date dtLib) {
-        this.dtLib = dtLib;
-    }
 
     //Implementar data
     public Transacao()
@@ -52,11 +37,11 @@ public class Transacao {
         this.id = id;
     }
 
-    public int getIdConta() {
+    public long getIdConta() {
         return idConta;
     }
 
-    public void setIdConta(int idConta) {
+    public void setIdConta(long idConta) {
         this.idConta = idConta;
     }
 
@@ -90,5 +75,33 @@ public class Transacao {
 
     public void setNatureza(int natureza) {
         this.natureza = natureza;
+    }
+
+    public Date getDtIns() {
+        return dtIns;
+    }
+
+    public void setDtIns(Date dtIns) {
+        this.dtIns = dtIns;
+    }
+
+    public Date getDtLib() {
+        return dtLib;
+    }
+
+    public void setDtLib(Date dtLib) {
+        this.dtLib = dtLib;
+    }
+
+
+
+    @Override
+    public String toString()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        return "Id: " + getId() + "\nIdConta " + getIdConta() + "\nIdCategoria " + getIdCategoria() +
+        "\nValor " + getValor() + "\nDescr " + getDescricao() + "\nNatureza " + getNatureza() + "\nDtIns " + format.format(getDtIns()) + "\nDtLib" + format.format(getDtLib());
+
     }
 }

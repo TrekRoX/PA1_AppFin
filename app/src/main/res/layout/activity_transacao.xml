@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,12 +29,58 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
+
+
         <TextView
             android:id="@+id/textViewConta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CONTA"></TextView>
 
+        <Spinner
+            android:id="@+id/spinnerContaTrans"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CATEGORIA"></TextView>
+
+        <Spinner
+            android:id="@+id/spinnerCategoriaTrans"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+
+        <TextView
+            android:id="@+id/textViewDescrTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DESCRIÇÃO"></TextView>
+
+        <EditText
+            android:id="@+id/editTextDescrTrans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+
+
+        <TextView
+            android:id="@+id/textViewValorTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VALOR"></TextView>
+
+        <EditText
+            android:id="@+id/editTextValorTrans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            ></EditText>
 
 
 

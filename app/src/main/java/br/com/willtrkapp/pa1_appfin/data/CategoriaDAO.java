@@ -17,7 +17,7 @@ public class CategoriaDAO {
         this.dbHelper=new SQLiteHelper(context);
     }
 
-    public List<Categoria> buscaTodasContas()
+    public List<Categoria> buscaTodasCategorias()
     {
         database=dbHelper.getReadableDatabase();
         List<Categoria> categorias = new ArrayList<>();

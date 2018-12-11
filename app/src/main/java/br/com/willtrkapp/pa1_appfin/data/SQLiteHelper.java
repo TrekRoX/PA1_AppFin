@@ -16,7 +16,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     static final String TB_CONTA_KEY_ID = "id";
     static final String TB_CONTA_KEY_DESCR = "descr";
     static final String TB_CONTA_KEY_SALDO_INI = "saldoIni";
-    static final String TB_CONTA_KEY_SALDO = "saldo";
 
     //Tabela categorias
     static final String DB_TABLE_CATEGORIA = "categorias";
@@ -38,8 +37,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE_TB_CONTA = "CREATE TABLE "+ DB_TABLE_CONTA +" (" +
             TB_CONTA_KEY_ID  +  " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             TB_CONTA_KEY_DESCR + " TEXT NOT NULL, " +
-            TB_CONTA_KEY_SALDO_INI + " REAL, "  +
-            TB_CONTA_KEY_SALDO + " REAL); ";
+            TB_CONTA_KEY_SALDO_INI + " REAL); ";
 
     private static final String DB_CREATE_TB_CATEGORIA = "CREATE TABLE "+ DB_TABLE_CATEGORIA +" (" +
             TB_CATEGORIA_KEY_ID  +  " INTEGER PRIMARY KEY AUTOINCREMENT, " +

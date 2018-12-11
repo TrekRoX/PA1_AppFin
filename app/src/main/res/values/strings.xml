@@ -10,4 +10,6 @@
     <string name="conta_apagada">Conta removida</string>
     <string name="conta_alterada">Conta alterada</string>
     <string name="lista_contas_vazia">Lista de contas vazia</string>
+    <string name="novo_debito">Nova débito</string>
+    <string name="novo_credito">Novo crédito</string>
 </resources>

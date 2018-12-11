@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.telephony.mbms.StreamingServiceInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,8 +41,8 @@ public class TransacaoDAO {
             trans.setValor(cursor.getFloat(3));
             trans.setDescricao(cursor.getString(4));
             trans.setNatureza(cursor.getInt(5));
-            trans.setDtIns(new Date(cursor.getLong(6)));
-            trans.setDtLib(new Date(cursor.getLong(7)));
+            trans.setDtIns(new Date(cursor.getLong(6) * 1000));
+            trans.setDtLib(new Date(cursor.getLong(7) * 1000));
 
             transacoes.add(trans);
         }
