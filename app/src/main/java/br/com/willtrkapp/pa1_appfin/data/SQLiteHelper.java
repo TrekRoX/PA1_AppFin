@@ -57,7 +57,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             TB_TRANSACAO_KEY_NATUREZA + " INTEGER NOT NULL, " + //1 = CREDITO 2 = DEBITO
             TB_TRANSACAO_KEY_DATA_INS + " INTEGER NOT NULL, " +
             TB_TRANSACAO_KEY_DATA_LIB + " INTEGER NOT NULL, " +
-            " FOREIGN KEY (" + TB_TRANSACAO_KEY_ID_CONTA + ") REFERENCES " + DB_TABLE_CONTA  +"(" + TB_CONTA_KEY_ID + " ), " +
+            " FOREIGN KEY (" + TB_TRANSACAO_KEY_ID_CONTA + ") REFERENCES " + DB_TABLE_CONTA  +"(" + TB_CONTA_KEY_ID + ") ON DELETE CASCADE, " +
             " FOREIGN KEY (" + TB_TRANSACAO_KEY_ID_CATEGORIA + ") REFERENCES " + DB_TABLE_CATEGORIA  +"(" + TB_CATEGORIA_KEY_ID + ")); ";
 
     SQLiteHelper(Context context) {

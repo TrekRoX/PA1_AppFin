@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.willtrkapp.pa1_appfin.model.Conta;
+import br.com.willtrkapp.pa1_appfin.util.Utilitarios;
 import br.com.willtrkapp.pa1_appfin.view.ContaSaldo;
 
 public class ContaDAO {
@@ -48,24 +49,39 @@ public class ContaDAO {
         return contas;
     }
 
-/*    public float getSaldoContas() {
-        float saldo = 0;
+    public float getSaldoAtualContas() {
+
+        float totSaldoIni = 0, totValorTrans = 0;
         database = dbHelper.getReadableDatabase();
-        String sql= "SELECT SUM(" + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ") FROM " + SQLiteHelper.DB_TABLE_CONTA + ";";
-        Cursor cursor = database.rawQuery(sql, null);
-        if(cursor.moveToFirst())
-            saldo = cursor.getFloat(0);
 
-        cursor.close();
+        //Saldo Inicial de todas as contas
+        String salConta= "SELECT SUM(" + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ") FROM " + SQLiteHelper.DB_TABLE_CONTA + ";";
+        Cursor cursorConta = database.rawQuery(salConta, null);
+        if(cursorConta.moveToFirst())
+            totSaldoIni = cursorConta.getFloat(0);
 
-        return saldo;
-    }*/
+        cursorConta.close();
+
+        Long dtTodayQuery = new Utilitarios().getCurrentUnixDate();
+        //Total de todas as transações até a data de hoje
+        String sqlTrans = "SELECT SUM(" + SQLiteHelper.TB_TRANSACAO_KEY_VALOR + ") FROM " + SQLiteHelper.DB_TABLE_TRANSACAO + " WHERE " + SQLiteHelper.DB_TABLE_TRANSACAO + "." + SQLiteHelper.TB_TRANSACAO_KEY_DATA_LIB + " <= " + dtTodayQuery + ";";
+        Cursor cursorTrans = database.rawQuery(sqlTrans, null);
+        if(cursorTrans.moveToFirst())
+            totValorTrans = cursorTrans.getFloat(0);
+
+        cursorTrans.close();
+
+        Log.v("LOG_FIN_PA1", "SALDO INI CONTAS " + totSaldoIni);
+        Log.v("LOG_FIN_PA1", "SALDO TRANSACAOES " + totValorTrans);
+
+        return totSaldoIni + totValorTrans;
+    }
 
     public List<ContaSaldo> buscaTodasContasComSaldoAtual()
     {
         database = dbHelper.getReadableDatabase();
         List<ContaSaldo> contas = new ArrayList<>();
-        Date dtToday = null;
+        /*Date dtToday = null;
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -74,7 +90,8 @@ public class ContaDAO {
             e.printStackTrace();
         }
 
-        Long dtTodayQuery = dtToday.getTime() / 1000;
+        Long dtTodayQuery = dtToday.getTime() / 1000;*/
+        Long dtTodayQuery = new Utilitarios().getCurrentUnixDate();
 
         String sql = "SELECT " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID  +  ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_DESCR  + ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ", " +
         SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + " + IFNULL(SUM (" + SQLiteHelper.DB_TABLE_TRANSACAO  + "." + SQLiteHelper.TB_TRANSACAO_KEY_VALOR +
@@ -129,6 +146,8 @@ public class ContaDAO {
     }
 
     public void removeConta(Conta c) {
-        dbHelper.getReadableDatabase().delete(SQLiteHelper.DB_TABLE_CONTA, SQLiteHelper.TB_CONTA_KEY_ID + "=" + c.getId(), null);
+        database = dbHelper.getReadableDatabase();
+        database.execSQL("PRAGMA foreign_keys=ON");
+        database.delete(SQLiteHelper.DB_TABLE_CONTA, SQLiteHelper.TB_CONTA_KEY_ID + "=" + c.getId(), null);
     }
 }

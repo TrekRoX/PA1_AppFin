@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.willtrkapp.pa1_appfin.R;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity  {
     private FloatingActionButton fabNvConta, fabNvDespesa, fabNvCredito;
 
     private RecyclerView recyclerView;
-
+    private TextView textViewSaldoAtual;
     private List<ContaSaldo> contas = new ArrayList<>();
     private ContaSaldoAdapter adapter;
 
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity  {
 
         contaDAO= new ContaDAO(this);
 
+        textViewSaldoAtual = (TextView) findViewById(R.id.textViewSaldoAtualContas);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,6 +85,7 @@ public class MainActivity extends AppCompatActivity  {
         fabNvCredito = (FloatingActionButton) findViewById(R.id.fabNvCredito);
         fabNvDespesa = (FloatingActionButton) findViewById(R.id.fabNvDespesa);
         faMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
+        faMenu.setClosedOnTouchOutside(true);
         inicializaEventosFloatingMenu();
 
         updateUI();
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private void inicializaEventosFloatingMenu()
     {
+
+
         //Controla os clicks individuais de cada floating button
         fabNvConta.setOnClickListener(onFloatButtonClick());
         fabNvDespesa.setOnClickListener(onFloatButtonClick());
@@ -149,9 +155,10 @@ public class MainActivity extends AppCompatActivity  {
 
     private void updateUI()
     {
+        float saldoAtualContas = contaDAO.getSaldoAtualContas();
+        textViewSaldoAtual.setText("Saldo Atual R$ " + saldoAtualContas);
 
         contas.clear();
-
         contas.addAll(contaDAO.buscaTodasContasComSaldoAtual());
         /*empty.setText(getResources().getString(R.string.lista_contas_vazia));*/
         /*fab.show();*/
@@ -204,6 +211,7 @@ public class MainActivity extends AppCompatActivity  {
                     contaDAO.removeConta(conta);
                     contas.remove(viewHolder.getAdapterPosition());
                     recyclerView.getAdapter().notifyItemRemoved(viewHolder.getAdapterPosition());
+                    updateUI();
                     showToast(getResources().getString(R.string.conta_apagada));
 
                 }
