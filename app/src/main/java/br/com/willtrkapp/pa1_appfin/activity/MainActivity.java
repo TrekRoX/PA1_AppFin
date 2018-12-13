@@ -13,9 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -182,11 +180,9 @@ public class MainActivity extends AppCompatActivity  {
 
     private void setupRecyclerView() {
 
-        Log.v("LOG_FIN_PA1", "Hit setupRecyclerView");
         adapter.setClickListener(new ContaSaldoAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.v("LOG_FIN_PA1", "Hit onItemClick");
 
                 final Conta conta = contas.get(position);
                 Intent i = new Intent(getApplicationContext(), ContaActivity.class);

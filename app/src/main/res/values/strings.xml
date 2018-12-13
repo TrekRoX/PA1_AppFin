@@ -12,4 +12,15 @@
     <string name="lista_contas_vazia">Lista de contas vazia</string>
     <string name="novo_debito">Nova débito</string>
     <string name="novo_credito">Novo crédito</string>
+    <string name="nenhuma_conta_selecionada_cadastre_uma_conta_antes">Nenhuma conta selecionada, cadastre uma conta antes</string>
+    <string name="repetir">Repetir</string>
+    <string name="data">Data</string>
+    <string name="digite_o_valor_antes">Digite o valor antes</string>
+    <string-array name="periodo_repeticoes">
+        <item>Diário</item>
+        <item>Semanal</item>
+        <item>Mensal</item>
+        <item>Anual</item>
+    </string-array>
+
 </resources>

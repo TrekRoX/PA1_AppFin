@@ -71,9 +71,6 @@ public class ContaDAO {
 
         cursorTrans.close();
 
-        Log.v("LOG_FIN_PA1", "SALDO INI CONTAS " + totSaldoIni);
-        Log.v("LOG_FIN_PA1", "SALDO TRANSACAOES " + totValorTrans);
-
         return totSaldoIni + totValorTrans;
     }
 
@@ -81,26 +78,24 @@ public class ContaDAO {
     {
         database = dbHelper.getReadableDatabase();
         List<ContaSaldo> contas = new ArrayList<>();
-        /*Date dtToday = null;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            dtToday = formatter.parse(formatter.format(new Date()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Long dtTodayQuery = dtToday.getTime() / 1000;*/
         Long dtTodayQuery = new Utilitarios().getCurrentUnixDate();
 
-        String sql = "SELECT " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID  +  ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_DESCR  + ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ", " +
+        /*String sql = "SELECT " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID  +  ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_DESCR  + ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ", " +
         SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + " + IFNULL(SUM (" + SQLiteHelper.DB_TABLE_TRANSACAO  + "." + SQLiteHelper.TB_TRANSACAO_KEY_VALOR +
         "), 0) FROM " + SQLiteHelper.DB_TABLE_CONTA + " LEFT JOIN " +  SQLiteHelper.DB_TABLE_TRANSACAO + " ON " +  SQLiteHelper.DB_TABLE_TRANSACAO  + "." + SQLiteHelper.TB_TRANSACAO_KEY_ID_CONTA + " = " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID +
         " WHERE " + SQLiteHelper.DB_TABLE_TRANSACAO + "." + SQLiteHelper.TB_TRANSACAO_KEY_DATA_LIB + " <= " + dtTodayQuery +
         " OR  " + SQLiteHelper.DB_TABLE_TRANSACAO + "." + SQLiteHelper.TB_TRANSACAO_KEY_ID + " IS NULL " +
-        "  GROUP BY " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID + ";";
+        "  GROUP BY " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID + ";";*/
 
-        Log.v("LOG_FIN_PA1", sql);
+        String sql = "SELECT " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID  +  ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_DESCR  + ", " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + ", " +
+                SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_SALDO_INI + " + IFNULL(SUM (" + SQLiteHelper.DB_TABLE_TRANSACAO  + "." + SQLiteHelper.TB_TRANSACAO_KEY_VALOR +
+                "), 0) FROM " + SQLiteHelper.DB_TABLE_CONTA + " LEFT JOIN " +  SQLiteHelper.DB_TABLE_TRANSACAO + " ON " +  SQLiteHelper.DB_TABLE_TRANSACAO  + "." + SQLiteHelper.TB_TRANSACAO_KEY_ID_CONTA + " = " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID +
+                " AND " + SQLiteHelper.DB_TABLE_TRANSACAO + "." + SQLiteHelper.TB_TRANSACAO_KEY_DATA_LIB + " <= " + dtTodayQuery +
+                "  GROUP BY " + SQLiteHelper.DB_TABLE_CONTA + "." + SQLiteHelper.TB_CONTA_KEY_ID + ";";
+
+
+        Log.v("LOG_FIN_PA1", "SQL: " + sql);
+
 
         Cursor cursor = database.rawQuery(sql, null);
         while (cursor.moveToNext())
@@ -147,7 +142,7 @@ public class ContaDAO {
 
     public void removeConta(Conta c) {
         database = dbHelper.getReadableDatabase();
-        database.execSQL("PRAGMA foreign_keys=ON");
+        /*database.execSQL("PRAGMA foreign_keys=ON");*/
         database.delete(SQLiteHelper.DB_TABLE_CONTA, SQLiteHelper.TB_CONTA_KEY_ID + "=" + c.getId(), null);
     }
 }

@@ -68,6 +68,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></EditText>
 
+        <TextView
+            android:id="@+id/textViewDtTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/data"></TextView>
+
+        <EditText
+            android:id="@+id/editTexDtTrans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="date" />
 
         <TextView
             android:id="@+id/textViewValorTrans"
@@ -81,6 +93,52 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal|numberSigned"
             ></EditText>
+
+        <CheckBox android:id="@+id/checkBoxRepeticoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/repetir" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayoutRepeticoes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="FORMA"
+            android:layout_weight="1"></TextView>
+
+        <Spinner
+            android:id="@+id/spinnerPeriodoRepeticoes"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:entries="@array/periodo_repeticoes"
+            android:layout_weight="1">
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="VEZES"
+            android:layout_weight="1"></TextView>
+
+        <NumberPicker
+            android:id="@+id/numberPickerRepeticoes"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="1" />
+
+
+
+    </LinearLayout>
+
+
+
+
 
 
 
